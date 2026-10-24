@@ -1,5 +1,5 @@
 import { useId } from "react";
-import type { IconeArea } from "@/data/site";
+import { site, type IconeArea } from "@/data/site";
 import { formas, viewBox } from "./simbolo-formas";
 
 /**
@@ -27,18 +27,16 @@ export function Simbolo({ className }: { className?: string }) {
   );
 }
 
+/** Símbolo, sigla e, de md para cima, o nome completo separado por uma barra. */
 export function Logo({ claro = false }: { claro?: boolean }) {
   return (
     <span className="flex items-center gap-2.5">
       <Simbolo className="h-9 w-9 shrink-0" />
-      <span className={`leading-tight ${claro ? "text-white" : "text-navy"}`}>
-        <span className="block text-[0.95rem] font-semibold tracking-tight">BioDatA</span>
-        <span
-          className={`block text-[0.6rem] font-medium uppercase tracking-[0.16em] ${
-            claro ? "text-white/55" : "text-cinza"
-          }`}
-        >
-          Research Group
+      <span className={`flex items-baseline gap-2 leading-tight ${claro ? "text-white" : "text-navy"}`}>
+        <span className="text-[0.95rem] font-semibold tracking-tight">BioDatA</span>
+        <span className={`hidden md:inline ${claro ? "text-white/30" : "text-linha"}`}>|</span>
+        <span className={`hidden text-xs md:inline ${claro ? "text-white/60" : "text-cinza"}`}>
+          {site.nomeCompleto}
         </span>
       </span>
     </span>

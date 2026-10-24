@@ -19,6 +19,10 @@
   --animate-marquee: marquee 40s linear infinite;
   --animate-pulso: pulso 2.4s ease-in-out infinite;
   --animate-girar: girar 60s linear infinite;
+  /* Os dois têm a mesma duração: o anel gira e o card gira ao contrário,
+     por isso ele orbita sem tombar. */
+  --animate-orbita: girar 90s linear infinite;
+  --animate-orbita-inversa: girar 90s linear infinite reverse;
   --animate-varre: varre 4s ease-in-out infinite;
 }
 

@@ -28,6 +28,7 @@ export const navegacao = [
   { rotulo: "Parcerias", href: "#parcerias" },
   { rotulo: "Equipe", href: "#equipe" },
   { rotulo: "Faça parte", href: "#faca-parte" },
+  { rotulo: "Contatos", href: "#contato" },
 ];
 
 /** Selos de credibilidade logo abaixo do hero. */
@@ -35,6 +36,16 @@ export const selos = [
   { titulo: "Nota 7 CAPES", texto: "Vinculado ao PPGETI/UFC, nível de excelência internacional" },
   { titulo: "Parceiro LESC", texto: "Unidade EMBRAPII em Sistemas Embarcados Complexos" },
   { titulo: "Certificado CNPq", texto: "Grupo certificado pela UFC no Diretório de Grupos" },
+];
+
+/** Cards que orbitam o símbolo no hero. `numero` vira o selo redondo; sem
+    ele, entra o ícone indicado. */
+export const orbita: { numero?: string; icone?: "pulso" | "check"; titulo: string; texto: string }[] = [
+  { numero: "7", titulo: "Nota máxima", texto: "CAPES · PPGETI" },
+  { icone: "pulso", titulo: "Parceiro LESC", texto: "Unidade EMBRAPII" },
+  { numero: "6", titulo: "Áreas de pesquisa", texto: "IA, imagem, sinais e mais" },
+  { icone: "check", titulo: "Certificado", texto: "CNPq · UFC" },
+  { numero: "1º", titulo: "Ranking Research.com", texto: "entre os cientistas da UFC" },
 ];
 
 export const numerosDestaque = [

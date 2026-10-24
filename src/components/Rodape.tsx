@@ -18,11 +18,12 @@ export default function Rodape() {
           <div>
             <p className="sobrancelha sobrancelha-clara">Contato</p>
             <h2 className="mt-5 text-3xl font-semibold leading-tight tracking-tight sm:text-5xl">
-              Tem um problema em saúde? <span className="texto-ciano">Fale com a gente.</span>
+              Tem um problema em saúde?{" "}
+              <span className="texto-ciano">Fale com a gente.</span>
             </h2>
             <p className="mt-5 max-w-xl text-lg text-white/65">
-              Empresas, hospitais, pesquisadores e estudantes podem escrever para o grupo e contar
-              o que querem resolver.
+              Empresas, hospitais, pesquisadores e estudantes podem escrever
+              para o grupo e contar o que querem resolver.
             </p>
           </div>
           {/* Só ícones: o endereço e o perfil ficam no rótulo acessível e no title. */}
@@ -58,30 +59,52 @@ export default function Rodape() {
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/55">
               {site.nomeCompleto}. {site.endereco}.
             </p>
-            <p className="mt-4 text-sm italic text-white/40">{site.assinatura}</p>
+            <p className="mt-4 text-sm italic text-white/40">
+              {site.assinatura}
+            </p>
           </div>
           <nav aria-label="Rodapé">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Navegação</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
+              Navegação
+            </p>
             <ul className="mt-4 space-y-2.5">
-              {navegacao.map((item) => (
-                <li key={item.href}>
-                  <a href={item.href} className="text-sm text-white/70 transition-colors hover:text-ciano">
-                    {item.rotulo}
-                  </a>
-                </li>
-              ))}
+              {/* O rodapé já é o contato, então esse item não se repete aqui. */}
+              {navegacao
+                .filter((item) => item.href !== "#contato")
+                .map((item) => (
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
+                      className="text-sm text-white/70 transition-colors hover:text-ciano"
+                    >
+                      {item.rotulo}
+                    </a>
+                  </li>
+                ))}
             </ul>
           </nav>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Vínculos</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
+              Vínculos
+            </p>
             <ul className="mt-4 space-y-2.5 text-sm text-white/70">
               <li>
-                <a href="https://www.ufc.br" target="_blank" rel="noreferrer" className="hover:text-ciano">
+                <a
+                  href="https://www.ufc.br"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-ciano"
+                >
                   Universidade Federal do Ceará
                 </a>
               </li>
               <li>
-                <a href="https://ppgeti.ufc.br/pt/" target="_blank" rel="noreferrer" className="hover:text-ciano">
+                <a
+                  href="https://ppgeti.ufc.br/pt/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-ciano"
+                >
                   PPGETI, nota 7 CAPES
                 </a>
               </li>
@@ -96,7 +119,12 @@ export default function Rodape() {
                 </a>
               </li>
               <li>
-                <a href={site.cnpq} target="_blank" rel="noreferrer" className="hover:text-ciano">
+                <a
+                  href={site.cnpq}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-ciano"
+                >
                   Espelho do grupo no CNPq
                 </a>
               </li>

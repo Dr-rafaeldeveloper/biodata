@@ -1,11 +1,15 @@
-import { numerosDestaque, selos } from "@/data/site";
+import type { CSSProperties } from "react";
+import { numerosDestaque, orbita, selos } from "@/data/site";
 import Contador from "./Contador";
 import { Check, Seta, Simbolo } from "./Marca";
 import Rede from "./Rede";
 
 export default function Hero() {
   return (
-    <section id="inicio" className="relative isolate overflow-hidden bg-navy-escuro text-white">
+    <section
+      id="inicio"
+      className="relative isolate overflow-hidden bg-navy-escuro text-white"
+    >
       {/* Fundo: rede viva, brilhos e grade de pontos. */}
       <Rede className="absolute inset-0 -z-10 h-full w-full" />
       <div className="absolute -right-40 -top-40 -z-20 h-[38rem] w-[38rem] animate-deriva rounded-full bg-azul/60 blur-3xl" />
@@ -14,23 +18,29 @@ export default function Hero() {
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-16 pt-32 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:pb-24 lg:pt-40">
         <div>
-          <p className="entra sobrancelha sobrancelha-clara">Pesquisa · Dados · IA · Saúde</p>
+          <p className="entra sobrancelha sobrancelha-clara">
+            Pesquisa · Dados · IA · Saúde
+          </p>
           <h1
             className="entra mt-6 text-[2.5rem] font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.25rem]"
             style={{ animationDelay: "80ms" }}
           >
-            Ciência de dados que vira <span className="texto-ciano">inovação aplicada</span> em
-            saúde.
+            Ciência de dados que vira{" "}
+            <span className="texto-ciano">inovação aplicada</span> em saúde.
           </h1>
           <p
             className="entra mt-6 max-w-xl text-lg leading-relaxed text-white/70"
             style={{ animationDelay: "160ms" }}
           >
-            Somos o Biomedical Data Analytics Research Group da UFC. Usamos inteligência
-            artificial, processamento de sinais e visão computacional em problemas reais da
-            medicina, e o que desenvolvemos é feito para sair do laboratório.
+            Somos o Biomedical Data Analytics Research Group da UFC. Usamos
+            inteligência artificial, processamento de sinais e visão
+            computacional em problemas reais da medicina, e o que desenvolvemos
+            é feito para sair do laboratório.
           </p>
-          <div className="entra mt-9 flex flex-wrap gap-3" style={{ animationDelay: "240ms" }}>
+          <div
+            className="entra mt-9 flex flex-wrap gap-3"
+            style={{ animationDelay: "240ms" }}
+          >
             <a href="#pesquisa" className="botao botao-ciano">
               Conheça nossa pesquisa
               <Seta className="h-4 w-4" />
@@ -41,28 +51,58 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Cartão com o símbolo e os selos, o "produto" visual do hero. */}
-        <div className="entra relative hidden lg:block" style={{ animationDelay: "300ms" }}>
+        {/* Símbolo com os cards orbitando sobre o anel externo. */}
+        <div
+          className="entra relative hidden lg:block"
+          style={{ animationDelay: "300ms" }}
+        >
           <div className="absolute inset-0 m-auto h-80 w-80 animate-girar rounded-full border border-dashed border-ciano/25" />
-          <div className="absolute inset-0 m-auto h-[26rem] w-[26rem] rounded-full border border-white/5" />
+          <div className="absolute inset-0 m-auto h-[var(--orbita)] w-[var(--orbita)] rounded-full border border-white/5 [--orbita:23rem] xl:[--orbita:26rem]" />
           <div className="relative mx-auto grid h-[26rem] w-[26rem] place-items-center">
             <Simbolo className="h-44 w-44 drop-shadow-[0_0_50px_rgba(0,228,255,0.35)]" />
           </div>
-          <div className="vidro absolute -left-6 top-10 flex items-center gap-3 px-4 py-3">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-ciano text-sm font-bold text-navy-escuro">
-              7
-            </span>
-            <span className="text-sm leading-tight">
-              Nota máxima
-              <span className="block text-xs text-white/55">CAPES · PPGETI</span>
-            </span>
-          </div>
-          <div className="vidro absolute -right-2 bottom-12 flex items-center gap-3 px-4 py-3">
-            <span className="h-2.5 w-2.5 animate-pulso rounded-full bg-ciano" />
-            <span className="text-sm leading-tight">
-              Parceiro LESC
-              <span className="block text-xs text-white/55">Unidade EMBRAPII</span>
-            </span>
+
+          {/* Três camadas por card: a primeira põe o card no ângulo certo da
+              órbita, a segunda centraliza o card nesse ponto e a terceira gira
+              ao contrário do anel para o card ficar sempre em pé. */}
+          <div className="absolute inset-0 m-auto h-0 w-0 animate-orbita [--raio:11.5rem] xl:[--raio:13rem]">
+            {orbita.map((card, i) => (
+              <div
+                key={card.titulo}
+                className="absolute left-0 top-0 [transform:rotate(var(--ang))_translateX(var(--raio))_rotate(calc(var(--ang)*-1))]"
+                style={
+                  {
+                    "--ang": `${(360 / orbita.length) * i - 90}deg`,
+                  } as CSSProperties
+                }
+              >
+                <div className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2">
+                  {/* O scale do hover fica num nível próprio: a animação de
+                      contragiro ocupa o transform do elemento de cima. */}
+                  <div className="animate-orbita-inversa">
+                    <div className="vidro flex items-center gap-3 whitespace-nowrap px-4 py-3 transition-transform duration-300 hover:scale-110">
+                      {card.numero ? (
+                        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ciano text-sm font-bold text-navy-escuro">
+                          {card.numero}
+                        </span>
+                      ) : card.icone === "check" ? (
+                        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ciano/15 text-ciano">
+                          <Check className="h-4 w-4" />
+                        </span>
+                      ) : (
+                        <span className="mx-3 h-2.5 w-2.5 shrink-0 animate-pulso rounded-full bg-ciano" />
+                      )}
+                      <span className="text-sm leading-tight">
+                        {card.titulo}
+                        <span className="block text-xs text-white/55">
+                          {card.texto}
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -73,7 +113,11 @@ export default function Hero() {
           {numerosDestaque.map((n) => (
             <div key={n.rotulo} className="border-l border-white/10 pl-5">
               <dd className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                <Contador valor={n.valor} sufixo={n.sufixo} semAgrupar={n.semAgrupar} />
+                <Contador
+                  valor={n.valor}
+                  sufixo={n.sufixo}
+                  semAgrupar={n.semAgrupar}
+                />
               </dd>
               <dt className="mt-1 text-sm text-white/55">{n.rotulo}</dt>
             </div>

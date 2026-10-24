@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { navegacao } from "@/data/site";
-import { Logo, Seta } from "./Marca";
+import { Logo } from "./Marca";
 
 export default function Cabecalho() {
   const [rolou, setRolou] = useState(false);
@@ -33,7 +33,11 @@ export default function Cabecalho() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
-        <a href="#inicio" onClick={() => setAberto(false)} aria-label="BioDatA, início">
+        <a
+          href="#inicio"
+          onClick={() => setAberto(false)}
+          aria-label="BioDatA, início"
+        >
           <Logo claro />
         </a>
 
@@ -50,10 +54,6 @@ export default function Cabecalho() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a href="#contato" className="botao botao-ciano hidden px-5 py-2.5 text-sm sm:inline-flex">
-            Fale conosco
-            <Seta className="h-4 w-4" />
-          </a>
           <button
             type="button"
             onClick={() => setAberto((v) => !v)}
@@ -97,13 +97,6 @@ export default function Cabecalho() {
                   {item.rotulo}
                 </a>
               ))}
-              <a
-                href="#contato"
-                onClick={() => setAberto(false)}
-                className="botao botao-ciano mt-5 w-full"
-              >
-                Fale conosco
-              </a>
             </div>
           </motion.nav>
         ) : null}
