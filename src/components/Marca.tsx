@@ -1,21 +1,29 @@
-import Image from "next/image";
+import { useId } from "react";
 import type { IconeArea } from "@/data/site";
+import { formas, viewBox } from "./simbolo-formas";
 
 /**
- * Símbolo oficial do BioDatA, vetorizado a partir da arte enviada pelo grupo
- * (public/brand/simbolo.svg). O next/image cuida do basePath no GitHub Pages
- * e não otimiza SVG, então o arquivo é servido como está.
+ * Símbolo oficial do BioDatA, vetorizado a partir da arte enviada pelo grupo.
+ * Fica embutido no HTML em vez de carregado por URL: assim não depende do
+ * basePath do GitHub Pages nem de cache, e não gera requisição extra.
  */
 export function Simbolo({ className }: { className?: string }) {
+  const id = useId();
   return (
-    <Image
-      src="/brand/simbolo.svg"
-      alt=""
-      width={604}
-      height={540}
-      priority
-      className={className}
-    />
+    <svg viewBox={viewBox} className={className} aria-hidden="true">
+      <defs>
+        {formas.map((f, i) => (
+          <linearGradient key={i} id={`${id}${i}`} x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor={f.cores[0]} />
+            <stop offset="0.5" stopColor={f.cores[1]} />
+            <stop offset="1" stopColor={f.cores[2]} />
+          </linearGradient>
+        ))}
+      </defs>
+      {formas.map((f, i) => (
+        <path key={i} fill={`url(#${id}${i})`} d={f.d} />
+      ))}
+    </svg>
   );
 }
 
