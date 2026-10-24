@@ -23,7 +23,6 @@
      por isso ele orbita sem tombar. */
   --animate-orbita: girar 90s linear infinite;
   --animate-orbita-inversa: girar 90s linear infinite reverse;
-  --animate-varre: varre 4s ease-in-out infinite;
 }
 
 @keyframes deriva {
@@ -210,12 +209,46 @@ body {
   background-size: 22px 22px;
 }
 
-@keyframes varre {
-  0%,
-  100% {
-    transform: translateY(-40%);
-  }
-  50% {
-    transform: translateY(220%);
+/* Troca do símbolo no hero: ao passar o mouse, a versão normal some, a de
+   circuito aparece e as trilhas se desenham do ponto de solda inicial até o
+   final; os pontos acendem no fim. */
+.logo-troca .logo-base {
+  transition: opacity 0.5s ease;
+}
+.logo-troca .logo-circuito {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.logo-troca .traco {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1s ease 0.15s;
+}
+.logo-troca .solda {
+  opacity: 0;
+  transition: opacity 0.35s ease 0.9s;
+}
+.logo-troca:hover .logo-base {
+  opacity: 0;
+}
+.logo-troca:hover .logo-circuito {
+  opacity: 1;
+}
+.logo-troca:hover .traco {
+  stroke-dashoffset: 0;
+}
+.logo-troca:hover .solda {
+  opacity: 1;
+}
+
+/* Contorno tracejado "andando" em volta da região segmentada. */
+@keyframes tracejado {
+  to {
+    stroke-dashoffset: -22;
   }
 }
+
+@utility animate-tracejado {
+  animation: tracejado 1.2s linear infinite;
+}
+

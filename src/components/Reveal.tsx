@@ -20,7 +20,12 @@ type Props = {
 };
 
 /** Sobe e revela o conteúdo quando ele entra na tela, uma vez só. */
-export default function Reveal({ children, delay = 0, as = "div", className }: Props) {
+export default function Reveal({
+  children,
+  delay = 0,
+  as = "div",
+  className,
+}: Props) {
   const semMovimento = useReducedMotion();
   const Tag = TAGS[as];
 

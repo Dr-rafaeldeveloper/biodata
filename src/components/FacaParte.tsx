@@ -1,24 +1,31 @@
-import { beneficios, perfis } from "@/data/site";
+import { site } from "@/data/comum";
+import type { Conteudo } from "@/data/pt";
 import { Check, Externo, Seta } from "./Marca";
 import Rede from "./Rede";
 import Reveal from "./Reveal";
 import Titulo from "./Titulo";
 
 /** Seção no espírito de uma página de carreiras: por que entrar e como entrar. */
-export default function FacaParte() {
+export default function FacaParte({ c }: { c: Conteudo }) {
+  const f = c.facaParte;
   return (
-    <section id="faca-parte" className="scroll-mt-20 py-24 sm:py-32">
+    <section id="faca-parte" className="scroll-mt-20 py-20 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Titulo
           centro
-          sobrancelha="Faça parte"
-          titulo="Venha pesquisar com a gente"
-          texto="Procuramos gente curiosa que quer ver a pesquisa sair do papel. No grupo você trabalha em projetos aplicados e publica o que desenvolve."
+          sobrancelha={f.sobrancelha}
+          titulo={f.titulo}
+          texto={f.texto}
         />
 
-        <ul className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {beneficios.map((b, i) => (
-            <Reveal as="li" key={b.titulo} delay={(i % 3) * 0.08} className="cartao cartao-vivo p-7">
+        <ul className="mt-12 sm:mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {f.beneficios.map((b, i) => (
+            <Reveal
+              as="li"
+              key={b.titulo}
+              delay={(i % 3) * 0.08}
+              className="cartao cartao-vivo p-7"
+            >
               <span className="grid h-10 w-10 place-items-center rounded-full bg-ciano/15 text-azul">
                 <Check className="h-5 w-5" />
               </span>
@@ -28,16 +35,16 @@ export default function FacaParte() {
           ))}
         </ul>
 
-        <Reveal className="relative mt-16 overflow-hidden rounded-3xl bg-gradient-to-br from-navy via-navy to-azul p-8 text-white sm:p-14">
+        <Reveal className="relative mt-12 sm:mt-16 overflow-hidden rounded-3xl bg-gradient-to-br from-navy via-navy to-azul p-8 text-white sm:p-14">
           <Rede className="absolute inset-0 h-full w-full" />
           <div className="pontos absolute inset-y-0 right-0 w-1/2 opacity-40 [mask-image:linear-gradient(to_left,black,transparent)]" />
           <div className="relative grid gap-10 lg:grid-cols-2">
             <div>
               <h3 className="text-2xl font-semibold leading-tight sm:text-3xl">
-                Quem procuramos
+                {f.procuramos}
               </h3>
               <ul className="mt-6 space-y-3">
-                {perfis.map((p) => (
+                {f.perfis.map((p) => (
                   <li key={p} className="flex items-start gap-3 text-white/80">
                     <Check className="mt-1 h-4 w-4 shrink-0 text-ciano" />
                     {p}
@@ -46,22 +53,19 @@ export default function FacaParte() {
               </ul>
             </div>
             <div className="flex flex-col justify-center gap-4 lg:items-start">
-              <p className="leading-relaxed text-white/70">
-                Para mestrado e doutorado, a entrada é pelos editais de seleção do PPGETI.
-                Para iniciação científica, colaboração ou pós-doutorado, fale direto com a gente.
-              </p>
+              <p className="leading-relaxed text-white/70">{f.ingresso}</p>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href="https://ppgeti.ufc.br/pt/"
+                  href={site.ppgeti}
                   target="_blank"
                   rel="noreferrer"
                   className="botao botao-ciano"
                 >
-                  Editais do PPGETI
+                  {f.botaoEditais}
                   <Externo className="h-4 w-4" />
                 </a>
                 <a href="#contato" className="botao botao-contorno">
-                  Quero participar
+                  {f.botaoParticipar}
                   <Seta className="h-4 w-4" />
                 </a>
               </div>

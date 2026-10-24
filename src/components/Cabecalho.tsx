@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { navegacao } from "@/data/site";
-import { Logo } from "./Marca";
+import type { Conteudo } from "@/data/pt";
+import { BandeiraBR, BandeiraUS, Logo } from "./Marca";
 
-export default function Cabecalho() {
+export default function Cabecalho({ c }: { c: Conteudo }) {
   const [rolou, setRolou] = useState(false);
   const [aberto, setAberto] = useState(false);
 
@@ -36,13 +37,13 @@ export default function Cabecalho() {
         <a
           href="#inicio"
           onClick={() => setAberto(false)}
-          aria-label="BioDatA, início"
+          aria-label={c.cabecalho.inicio}
         >
           <Logo claro />
         </a>
 
         <nav className="hidden items-center gap-1 lg:flex">
-          {navegacao.map((item) => (
+          {c.nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
@@ -53,11 +54,12 @@ export default function Cabecalho() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <SeletorIdioma c={c} />
           <button
             type="button"
             onClick={() => setAberto((v) => !v)}
-            aria-label={aberto ? "Fechar menu" : "Abrir menu"}
+            aria-label={aberto ? c.cabecalho.fecharMenu : c.cabecalho.abrirMenu}
             aria-expanded={aberto}
             className="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white lg:hidden"
           >
@@ -87,7 +89,7 @@ export default function Cabecalho() {
             className="overflow-hidden lg:hidden"
           >
             <div className="px-5 pb-6 pt-2">
-              {navegacao.map((item) => (
+              {c.nav.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -102,5 +104,53 @@ export default function Cabecalho() {
         ) : null}
       </AnimatePresence>
     </header>
+  );
+}
+
+/**
+ * Bandeiras de Brasil e Estados Unidos. São links para a outra versão do
+ * site (/ e /en); o Link cuida do basePath no GitHub Pages.
+ */
+function SeletorIdioma({ c }: { c: Conteudo }) {
+  const opcoes = [
+    {
+      lang: "pt-BR",
+      caminho: "/",
+      rotulo: c.cabecalho.portugues,
+      Bandeira: BandeiraBR,
+    },
+    {
+      lang: "en-US",
+      caminho: "/en",
+      rotulo: c.cabecalho.ingles,
+      Bandeira: BandeiraUS,
+    },
+  ];
+  return (
+    <div
+      role="group"
+      aria-label={c.cabecalho.idioma}
+      className="flex items-center gap-1 rounded-full border border-white/15 p-1"
+    >
+      {opcoes.map((o) => {
+        const ativo = o.lang === c.lang;
+        return (
+          <Link
+            key={o.lang}
+            href={o.caminho}
+            hrefLang={o.lang}
+            lang={o.lang}
+            aria-label={o.rotulo}
+            aria-current={ativo ? "page" : undefined}
+            title={o.rotulo}
+            className={`grid h-8 w-8 place-items-center rounded-full transition-colors ${
+              ativo ? "bg-white/15" : "opacity-60 hover:opacity-100"
+            }`}
+          >
+            <o.Bandeira className="h-4 w-4 rounded-full" />
+          </Link>
+        );
+      })}
+    </div>
   );
 }

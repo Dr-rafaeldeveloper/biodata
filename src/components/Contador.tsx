@@ -3,17 +3,27 @@
 import { animate, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-type Props = { valor: number; sufixo?: string; semAgrupar?: boolean };
+type Props = {
+  valor: number;
+  sufixo?: string;
+  semAgrupar?: boolean;
+  locale?: string;
+};
 
 /** Número que sobe de zero até o valor quando entra na tela. */
-export default function Contador({ valor, sufixo = "", semAgrupar = false }: Props) {
+export default function Contador({
+  valor,
+  sufixo = "",
+  semAgrupar = false,
+  locale = "pt-BR",
+}: Props) {
   const ref = useRef<HTMLSpanElement>(null);
   const naTela = useInView(ref, { once: true, margin: "-40px" });
   const semMovimento = useReducedMotion();
   /* Começa no valor final para o HTML do servidor já sair correto. */
   const [atual, setAtual] = useState(valor);
   const formatar = (n: number) =>
-    semAgrupar ? String(n) : n.toLocaleString("pt-BR");
+    semAgrupar ? String(n) : n.toLocaleString(locale);
 
   useEffect(() => {
     if (!naTela || semMovimento) return;

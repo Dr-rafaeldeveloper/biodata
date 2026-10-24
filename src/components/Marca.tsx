@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { site, type IconeArea } from "@/data/site";
+import { site, type IconeArea } from "@/data/comum";
 import { formas, viewBox } from "./simbolo-formas";
 
 /**
@@ -32,10 +32,20 @@ export function Logo({ claro = false }: { claro?: boolean }) {
   return (
     <span className="flex items-center gap-2.5">
       <Simbolo className="h-9 w-9 shrink-0" />
-      <span className={`flex items-baseline gap-2 leading-tight ${claro ? "text-white" : "text-navy"}`}>
-        <span className="text-[0.95rem] font-semibold tracking-tight">BioDatA</span>
-        <span className={`hidden md:inline ${claro ? "text-white/30" : "text-linha"}`}>|</span>
-        <span className={`hidden text-xs md:inline ${claro ? "text-white/60" : "text-cinza"}`}>
+      <span
+        className={`flex items-baseline gap-2 leading-tight ${claro ? "text-white" : "text-navy"}`}
+      >
+        <span className="text-[0.95rem] font-semibold tracking-tight">
+          BioDatA
+        </span>
+        <span
+          className={`hidden md:inline ${claro ? "text-white/30" : "text-linha"}`}
+        >
+          |
+        </span>
+        <span
+          className={`hidden text-xs md:inline ${claro ? "text-white/60" : "text-cinza"}`}
+        >
           {site.nomeCompleto}
         </span>
       </span>
@@ -52,9 +62,20 @@ const traco = {
 };
 
 /** Ícones de linha fina no estilo do manual. */
-export function IconeArea({ nome, className }: { nome: IconeArea; className?: string }) {
+export function IconeArea({
+  nome,
+  className,
+}: {
+  nome: IconeArea;
+  className?: string;
+}) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traco}>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      {...traco}
+    >
       {nome === "cerebro" && (
         <>
           <path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 1V6a2 2 0 0 0-3-2Z" />
@@ -88,8 +109,20 @@ export function IconeArea({ nome, className }: { nome: IconeArea; className?: st
         <>
           <circle cx="12" cy="12" r="1.8" />
           <ellipse cx="12" cy="12" rx="9.5" ry="3.8" />
-          <ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(60 12 12)" />
-          <ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(120 12 12)" />
+          <ellipse
+            cx="12"
+            cy="12"
+            rx="9.5"
+            ry="3.8"
+            transform="rotate(60 12 12)"
+          />
+          <ellipse
+            cx="12"
+            cy="12"
+            rx="9.5"
+            ry="3.8"
+            transform="rotate(120 12 12)"
+          />
         </>
       )}
     </svg>
@@ -98,7 +131,13 @@ export function IconeArea({ nome, className }: { nome: IconeArea; className?: st
 
 export function Seta({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traco} strokeWidth={2}>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      {...traco}
+      strokeWidth={2}
+    >
       <path d="M5 12h14m-5-5 5 5-5 5" />
     </svg>
   );
@@ -106,7 +145,13 @@ export function Seta({ className }: { className?: string }) {
 
 export function Externo({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traco} strokeWidth={2}>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      {...traco}
+      strokeWidth={2}
+    >
       <path d="M7 17 17 7M9 7h8v8" />
     </svg>
   );
@@ -114,7 +159,13 @@ export function Externo({ className }: { className?: string }) {
 
 export function IconeEmail({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traco} strokeWidth={1.8}>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      {...traco}
+      strokeWidth={1.8}
+    >
       <rect x="3" y="5" width="18" height="14" rx="2.5" />
       <path d="m3.5 7 8.5 6 8.5-6" />
     </svg>
@@ -123,7 +174,13 @@ export function IconeEmail({ className }: { className?: string }) {
 
 export function IconeInstagram({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traco} strokeWidth={1.8}>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      {...traco}
+      strokeWidth={1.8}
+    >
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none" />
@@ -131,9 +188,60 @@ export function IconeInstagram({ className }: { className?: string }) {
   );
 }
 
+/** Bandeiras simplificadas para o seletor de idioma, desenhadas num círculo. */
+export function BandeiraBR({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="12" fill="#009C3B" />
+      <path d="M12 4.5 20.5 12 12 19.5 3.5 12Z" fill="#FFDF00" />
+      <circle cx="12" cy="12" r="4.2" fill="#002776" />
+      <path
+        d="M8.2 11.2c2.6-.7 5.3-.2 7.4 1.3"
+        stroke="#fff"
+        strokeWidth=".9"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+export function BandeiraUS({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <clipPath id="bandeira-us">
+        <circle cx="12" cy="12" r="12" />
+      </clipPath>
+      <g clipPath="url(#bandeira-us)">
+        <rect width="24" height="24" fill="#fff" />
+        {[0, 2, 4, 6, 8, 10, 12].map((i) => (
+          <rect
+            key={i}
+            y={(i * 24) / 13}
+            width="24"
+            height={24 / 13}
+            fill="#B22234"
+          />
+        ))}
+        <rect width="11" height="13" fill="#3C3B6E" />
+        {[2, 5, 8].flatMap((x) =>
+          [2.5, 5.5, 8.5].map((y) => (
+            <circle key={`${x}-${y}`} cx={x} cy={y} r=".75" fill="#fff" />
+          )),
+        )}
+      </g>
+    </svg>
+  );
+}
+
 export function Check({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traco} strokeWidth={2.2}>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      {...traco}
+      strokeWidth={2.2}
+    >
       <path d="m5 12.5 4.5 4.5L19 7.5" />
     </svg>
   );

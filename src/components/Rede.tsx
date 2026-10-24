@@ -17,7 +17,9 @@ export default function Rede({ className }: { className?: string }) {
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
-    const parado = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const parado = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     let largura = 0;
     let altura = 0;
     let nos: No[] = [];
@@ -67,7 +69,9 @@ export default function Rede({ className }: { className?: string }) {
           }
         }
         const perto = Math.hypot(a.x - mouse.x, a.y - mouse.y) < 160;
-        ctx.fillStyle = perto ? "rgba(107, 239, 255, 0.95)" : "rgba(0, 228, 255, 0.55)";
+        ctx.fillStyle = perto
+          ? "rgba(107, 239, 255, 0.95)"
+          : "rgba(0, 228, 255, 0.55)";
         ctx.beginPath();
         ctx.arc(a.x, a.y, perto ? 2.2 : 1.4, 0, Math.PI * 2);
         ctx.fill();
