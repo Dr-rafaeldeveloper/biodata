@@ -1,5 +1,6 @@
 import { parceiros, passosEmbrapii, projetosFuturos } from "@/data/site";
 import { Externo, Seta } from "./Marca";
+import Rede from "./Rede";
 import Reveal from "./Reveal";
 import Titulo from "./Titulo";
 
@@ -9,6 +10,7 @@ export default function Parcerias() {
       id="parcerias"
       className="relative isolate scroll-mt-20 overflow-hidden bg-navy-escuro py-24 text-white sm:py-32"
     >
+      <Rede className="absolute inset-0 -z-10 h-full w-full" />
       <div className="pontos absolute inset-0 -z-10 opacity-30 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" />
       <div className="absolute -left-40 top-1/3 -z-10 h-[30rem] w-[30rem] rounded-full bg-azul/40 blur-3xl" />
 

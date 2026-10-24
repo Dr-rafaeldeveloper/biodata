@@ -32,7 +32,9 @@ export default function Rede({ className }: { className?: string }) {
       canvas.width = largura * dpr;
       canvas.height = altura * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const total = Math.round(Math.min(110, (largura * altura) / 11000));
+      /* Densidade constante: um ponto a cada ~11 mil px², com teto para a
+         checagem de pares (n²) não pesar nas seções mais altas. */
+      const total = Math.round(Math.min(240, (largura * altura) / 11000));
       nos = Array.from({ length: total }, () => ({
         x: Math.random() * largura,
         y: Math.random() * altura,

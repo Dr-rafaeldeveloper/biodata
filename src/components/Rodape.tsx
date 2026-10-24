@@ -1,12 +1,17 @@
 import { navegacao, site } from "@/data/site";
 import { IconeEmail, IconeInstagram, Logo } from "./Marca";
+import Rede from "./Rede";
 import Reveal from "./Reveal";
 
 export default function Rodape() {
   const ano = new Date().getFullYear();
 
   return (
-    <footer id="contato" className="scroll-mt-20 bg-navy-escuro text-white">
+    <footer
+      id="contato"
+      className="relative isolate scroll-mt-20 overflow-hidden bg-navy-escuro text-white"
+    >
+      <Rede className="absolute inset-0 -z-10 h-full w-full" />
       {/* Chamada final de contato. */}
       <div className="mx-auto max-w-7xl px-5 pt-24 sm:px-8">
         <Reveal className="grid gap-10 border-b border-white/10 pb-16 lg:grid-cols-[1.3fr_1fr] lg:items-end">

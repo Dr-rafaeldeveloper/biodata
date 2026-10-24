@@ -1,5 +1,6 @@
 import { beneficios, perfis } from "@/data/site";
 import { Check, Externo, Seta } from "./Marca";
+import Rede from "./Rede";
 import Reveal from "./Reveal";
 import Titulo from "./Titulo";
 
@@ -28,6 +29,7 @@ export default function FacaParte() {
         </ul>
 
         <Reveal className="relative mt-16 overflow-hidden rounded-3xl bg-gradient-to-br from-navy via-navy to-azul p-8 text-white sm:p-14">
+          <Rede className="absolute inset-0 h-full w-full" />
           <div className="pontos absolute inset-y-0 right-0 w-1/2 opacity-40 [mask-image:linear-gradient(to_left,black,transparent)]" />
           <div className="relative grid gap-10 lg:grid-cols-2">
             <div>

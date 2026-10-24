@@ -1,5 +1,6 @@
 import { areas, projetoDestaque } from "@/data/site";
 import { Externo, IconeArea } from "./Marca";
+import Rede from "./Rede";
 import Reveal from "./Reveal";
 import Titulo from "./Titulo";
 
@@ -39,8 +40,9 @@ export default function Pesquisa() {
         </ul>
 
         {/* Pesquisa em destaque, bloco escuro com uma "imagem" gerada em CSS. */}
-        <Reveal className="mt-16 overflow-hidden rounded-3xl bg-navy text-white">
-          <div className="grid items-center gap-10 p-8 sm:p-12 lg:grid-cols-2">
+        <Reveal className="relative mt-16 overflow-hidden rounded-3xl bg-navy text-white">
+          <Rede className="absolute inset-0 h-full w-full" />
+          <div className="relative grid items-center gap-10 p-8 sm:p-12 lg:grid-cols-2">
             <div>
               <p className="text-sm font-semibold text-ciano">{projetoDestaque.rotulo}</p>
               <h3 className="mt-4 text-2xl font-semibold leading-tight sm:text-3xl">
