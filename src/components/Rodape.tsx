@@ -1,5 +1,5 @@
 import { navegacao, site } from "@/data/site";
-import { Logo, Seta } from "./Marca";
+import { IconeEmail, IconeInstagram, Logo } from "./Marca";
 import Reveal from "./Reveal";
 
 export default function Rodape() {
@@ -20,15 +20,31 @@ export default function Rodape() {
               o que querem resolver.
             </p>
           </div>
-          <div className="flex flex-col gap-3 lg:items-end">
-            <a href={`mailto:${site.email}`} className="botao botao-ciano">
-              {site.email}
-              <Seta className="h-4 w-4" />
-            </a>
-            <a href={site.instagram} target="_blank" rel="noreferrer" className="botao botao-contorno">
-              Instagram @_biodata_
-            </a>
-          </div>
+          {/* Só ícones: o endereço e o perfil ficam no rótulo acessível e no title. */}
+          <ul className="flex gap-3 lg:justify-end">
+            <li>
+              <a
+                href={`mailto:${site.email}`}
+                aria-label={`E-mail: ${site.email}`}
+                title={site.email}
+                className="grid h-14 w-14 place-items-center rounded-full bg-ciano text-navy-escuro transition-colors hover:bg-ciano-claro"
+              >
+                <IconeEmail className="h-6 w-6" />
+              </a>
+            </li>
+            <li>
+              <a
+                href={site.instagram}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram @_biodata_"
+                title="Instagram @_biodata_"
+                className="grid h-14 w-14 place-items-center rounded-full border border-white/35 text-white transition-colors hover:border-ciano hover:text-ciano"
+              >
+                <IconeInstagram className="h-6 w-6" />
+              </a>
+            </li>
+          </ul>
         </Reveal>
 
         <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">

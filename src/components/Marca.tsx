@@ -1,39 +1,21 @@
-import { useId } from "react";
+import Image from "next/image";
 import type { IconeArea } from "@/data/site";
 
 /**
- * Símbolo do BioDatA redesenhado em vetor a partir do manual: duas ondas que
- * se encaixam, lembrando ao mesmo tempo um cérebro e um fluxo de dados.
- * TODO: trocar pelo SVG oficial quando o arquivo da marca chegar.
+ * Símbolo oficial do BioDatA, vetorizado a partir da arte enviada pelo grupo
+ * (public/brand/simbolo.svg). O next/image cuida do basePath no GitHub Pages
+ * e não otimiza SVG, então o arquivo é servido como está.
  */
 export function Simbolo({ className }: { className?: string }) {
-  const id = useId();
   return (
-    <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
-      <defs>
-        <linearGradient id={`${id}a`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#6BEFFF" />
-          <stop offset="1" stopColor="#00A9D6" />
-        </linearGradient>
-        <linearGradient id={`${id}b`} x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#1B6C9C" />
-          <stop offset="1" stopColor="#0B4164" />
-        </linearGradient>
-      </defs>
-      <path
-        fill={`url(#${id}b)`}
-        d="M10 26c0-11 10-18 22-18 9 0 17 4 21 10-6-3-13-3-19 1-5 3-9 4-14 2-4-2-8 0-10 5Z"
-      />
-      <path
-        fill={`url(#${id}a)`}
-        d="M6 36c4-9 13-12 22-8 7 3 12 3 18-1 6-4 12-2 14 4 1 9-7 18-19 20-6 1-10-2-9-6 1-3 5-4 8-5-6 0-12 2-17 3-8 2-15-1-17-7Z"
-      />
-      <path
-        fill={`url(#${id}b)`}
-        d="M20 50c5 0 9-2 13-3-2 2-3 5-2 7-5 1-9-1-11-4Z"
-        opacity="0.9"
-      />
-    </svg>
+    <Image
+      src="/brand/simbolo.svg"
+      alt=""
+      width={604}
+      height={540}
+      priority
+      className={className}
+    />
   );
 }
 
@@ -120,6 +102,25 @@ export function Externo({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traco} strokeWidth={2}>
       <path d="M7 17 17 7M9 7h8v8" />
+    </svg>
+  );
+}
+
+export function IconeEmail({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traco} strokeWidth={1.8}>
+      <rect x="3" y="5" width="18" height="14" rx="2.5" />
+      <path d="m3.5 7 8.5 6 8.5-6" />
+    </svg>
+  );
+}
+
+export function IconeInstagram({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...traco} strokeWidth={1.8}>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none" />
     </svg>
   );
 }
