@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+/* Paleta do manual da marca BioDatA. Trocar uma cor aqui troca em todo lugar,
+   inclusive nos brilhos e na rede animada do hero. */
+@theme {
+  --color-navy: #062134;
+  --color-navy-escuro: #031522;
+  --color-azul: #0b4164;
+  --color-ciano: #00e4ff;
+  --color-ciano-claro: #6befff;
+  --color-fundo: #f4f8fb;
+  --color-tinta: #0d1b2a;
+  --color-cinza: #5b6b7c;
+  --color-linha: #dfe8ef;
+
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-deriva: deriva 18s ease-in-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-pulso: pulso 2.4s ease-in-out infinite;
+  --animate-girar: girar 60s linear infinite;
+  --animate-varre: varre 4s ease-in-out infinite;
+}
+
+@keyframes deriva {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(4%, -3%) scale(1.08);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pulso {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-ciano) 60%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes entra {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+html {
+  background-color: var(--color-fundo);
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-fundo);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-ciano);
+  color: var(--color-navy-escuro);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Entrada do hero em CSS puro, para o LCP não esperar a hidratação. */
+@utility entra {
+  animation: entra 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Sem JS o `whileInView` nunca dispara; aqui o conteúdo simplesmente aparece. */
+@media (scripting: none) {
+  .revela {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Rótulo pequeno em caixa alta que abre cada seção. */
+@utility sobrancelha {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-azul);
+}
+
+@utility sobrancelha-clara {
+  color: var(--color-ciano);
+}
+
+@utility cartao {
+  background-color: #fff;
+  border: 1px solid var(--color-linha);
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 2px rgb(6 33 52 / 0.04);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+@utility cartao-vivo {
+  &:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in oklab, var(--color-ciano) 55%, var(--color-linha));
+    box-shadow: 0 24px 48px -28px rgb(6 33 52 / 0.35);
+  }
+}
+
+/* Vidro escuro usado sobre os fundos navy. */
+@utility vidro {
+  background-color: rgb(255 255 255 / 0.04);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(12px);
+}
+
+@utility texto-ciano {
+  background-image: linear-gradient(95deg, var(--color-ciano) 0%, var(--color-ciano-claro) 100%);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.925rem;
+  padding: 0.8rem 1.5rem;
+  /* Botões não se movem nem brilham: no hover só a cor muda. */
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+@utility botao-ciano {
+  background-color: var(--color-ciano);
+  color: var(--color-navy-escuro);
+  &:hover {
+    background-color: var(--color-ciano-claro);
+  }
+}
+
+@utility botao-contorno {
+  border: 1px solid rgb(255 255 255 / 0.35);
+  color: #fff;
+  &:hover {
+    border-color: var(--color-ciano);
+    color: var(--color-ciano);
+  }
+}
+
+@utility botao-escuro {
+  background-color: var(--color-navy);
+  color: #fff;
+  &:hover {
+    background-color: var(--color-azul);
+  }
+}
+
+/* Grade de pontos discreta, elemento gráfico do manual. */
+@utility pontos {
+  background-image: radial-gradient(rgb(0 228 255 / 0.22) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@keyframes varre {
+  0%,
+  100% {
+    transform: translateY(-40%);
+  }
+  50% {
+    transform: translateY(220%);
+  }
+}
